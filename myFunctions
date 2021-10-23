@@ -1,0 +1,87 @@
+// using System;
+// using System.Text;
+// using QRCoder; 
+// using System.Data.SqlClient; 
+
+
+// namespace thom371d 
+// {
+//     public sealed class SqlConnection : System.Data.Common.DbConnection
+//     {
+//         private void saveToDatabase(StringBuilder bcode,int astID)      
+//         {      
+//             SqlConnection con = null;      
+//             int uid = Convert.ToInt32(HttpContext.Current.Session["uid"]);      
+//             try      
+//             {      
+            
+            
+//                 byte[] img = null;      
+//                 string code = bcode.ToString();      
+//                 string strn = bcode.ToString(); ;      
+//                 QRCodeGenerator qrGenerator = new QRCodeGenerator();      
+//                 QRCodeGenerator.QRCode qrCode = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);      
+//                 System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();      
+//                 imgBarCode.Height =50;      
+//                 imgBarCode.Width = 50;      
+//                 using (Bitmap bitMap = qrCode.GetGraphic(20))      
+//                 {      
+//                     using (MemoryStream ms = new MemoryStream())      
+//                     {      
+//                         bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);      
+            
+//                         img = new byte[ms.ToArray().Length];      
+//                         img = ms.ToArray();      
+//                     }      
+                        
+//                 }      
+            
+                        
+                        
+//                 con = Mydatabase.MyDB.getConnection();      
+//                 if (con.State == ConnectionState.Open)      
+//                     con.Close();      
+//                 con.Open();      
+//                 string SQL = "if not exists(select pid from qrunits where pid=@astid) insert into qrunits(brcd,img,pid,cur_dt,uid) values(@bcode,@img,@astid,@curdt,@uid) else update qrunits set brcd=@bcode,img=@img,cur_dt=@curdt,uid=@uid where pid=@astid ";      
+//                 SqlCommand command = new SqlCommand(SQL, con);      
+//                 command.Parameters.AddWithValue("@astid", astID);      
+//                 command.Parameters.AddWithValue("@bcode", strn);      
+//                 command.Parameters.AddWithValue("@img", img);      
+//                 command.Parameters.AddWithValue("@curdt", DateTime.Now.Date.ToString("MM/dd/yyyy"));      
+//                 command.Parameters.AddWithValue("@uid", uid);      
+//                 int i = command.ExecuteNonQuery();      
+            
+            
+//             }      
+//             catch (Exception ex)      
+//             {      
+//                 throw new Exception("Error in Saving Record.");      
+//             }      
+//             finally      
+//             {      
+//                 if (con.State == ConnectionState.Open)      
+//                     con.Close();      
+//             }      
+            
+//         } 
+//         // con = Mydatabase.MyDB.getConnection();    
+//     // string SQL = "select id,ast_id,MachineNo,invno,convert(nvarchar(11),ae.vchdate) invdate from asset";    
+//     // SqlCommand command = new SqlCommand(SQL, con);    
+
+//     // con.Open();    
+//     // SqlDataAdapter da = new SqlDataAdapter(command);    
+//     // DataTable dt = new DataTable();    
+//     // da.Fill(dt);    
+//     // for (int i = 0; i < dt.Rows.Count; i++)    
+//     // {    
+//     //     string astID = dt.Rows[i]["id"].ToString();    
+//     //     string astCode = dt.Rows[i]["ast_id"].ToString();    
+//     //     string loc = dt.Rows[i]["ast_loc"].ToString();    
+//     //     string serialNo = dt.Rows[i]["MachineNo"].ToString();    
+//     //     string invno = dt.Rows[i]["invno"].ToString();    
+//     //     string invdate = dt.Rows[i]["invdate"].ToString();    
+//     //     StringBuilder bcode1 = new StringBuilder("Ast Code : " + astCode + Environment.NewLine + "S.No : " + serialNo + Environment.NewLine + "Inv No : " + invno + Environment.NewLine + "Inv Date : " + invdate);    
+//     //     saveToDatabase(bcode1, Convert.ToInt32(astID));    
+//     // }   
+//     }
+// }
